@@ -3,10 +3,9 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_absolute_percentage_error as mape
 from sklearn.metrics import r2_score as r2
-from sklearn.metrics import mean_squared_error as mse
 
 # Load data
-Training_set = np.loadtxt("FOMCM_TrainSet.csv", delimiter=",")
+Training_set = np.loadtxt("SDS_729.csv", delimiter=",")
 Validation_set = np.loadtxt("FOMCM_Vali.csv", delimiter=",")
 
 # 訓練集
@@ -24,10 +23,10 @@ Feature = NM_F.transform(Feature)
 Vali_Feature = NM_F.transform(Vali_Feature)
 
 # 正規化輸出
-NM_O = MinMaxScaler()
-NM_O.fit(Output)
-Output = NM_O.transform(Output)
-Vali_Output = NM_O.transform(Vali_Output)
+# NM_O = MinMaxScaler()
+# NM_O.fit(Output)
+# Output = NM_O.transform(Output)
+# Vali_Output = NM_O.transform(Vali_Output)
 
 # 轉換XGB格式 (DMatrix)
 Train_data = xgb.DMatrix(Feature,label = Output)
@@ -40,13 +39,13 @@ params = {
     "nthread": -1,                  # 使用的線程數，-1 代表自動檢測
 
     # 樹模型參數
-    "eta": 0.001,                    # 學習率，範圍 (0, 1]
-    "max_depth": 6,              # 樹的最大深度，範圍 [1, ∞)
+    "eta": 0.0001,                    # 學習率，範圍 (0, 1]
+    "max_depth": 100,              # 樹的最大深度，範圍 [1, ∞)
     # "tree_method": "hist",          # 樹構建算法，可選 "auto", "exact", "approx", "hist", "gpu_hist"
 
     # 學習目標相關參數
     "objective": "reg:squarederror", # 學習目標，可選 "reg:squarederror", "binary:logistic", "multi:softmax", 等
-    "eval_metric": "mae",          # 評估指標，可選 "rmse", "logloss", "error", "auc", 等
+    "eval_metric": "rmse",          # 評估指標，可選 "rmse", "logloss", "error", "auc", 等
 
 }
 
@@ -54,14 +53,14 @@ params = {
 model = xgb.train(
     params,
     Train_data,
-    num_boost_round = 5000,
+    num_boost_round = 100000,
     evals = [(Vali_data,"test")],
     early_stopping_rounds= 20 ,
     )
 
 # XGB pred
 pred = model.predict(Vali_data).reshape(-1,1)
-pred = NM_O.inverse_transform(pred)
+# pred = NM_O.inverse_transform(pred)
 
 # XGB Scoring
 XGB_r2 = r2(Vali_Output,pred)

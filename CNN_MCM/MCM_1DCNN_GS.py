@@ -13,7 +13,7 @@ from sklearn.metrics import mean_squared_error as mse
 from keras.callbacks import EarlyStopping
 
 # Load data
-Training_set = np.loadtxt("FOMCM_TrainSet.csv", delimiter=",")
+Training_set = np.loadtxt("SDS_487.csv", delimiter=",")
 Validation_set = np.loadtxt("FOMCM_Vali.csv", delimiter=",")
 
 # 訓練集

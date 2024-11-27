@@ -13,7 +13,7 @@ from sklearn.metrics import mean_absolute_percentage_error as mape
 from sklearn.metrics import mean_squared_error as mse
 
 #Load data
-Training_set = np.loadtxt("FOMCM_TrainSet.csv", delimiter=",")
+Training_set = np.loadtxt("SDS_486.csv", delimiter=",")
 Validation_set = np.loadtxt("FOMCM_Vali.csv", delimiter=",")
 
 # 訓練集
@@ -33,10 +33,10 @@ Vali_Feature = NM.transform(Vali_Feature)
 # 正規化輸出
 Output = Output.reshape(-1,1)
 Vali_Output = Vali_Output.reshape(-1,1)
-NM_O = MinMaxScaler()
-NM_O.fit(Output)
-Output = NM_O.transform(Output)
-Vali_Output = NM_O.transform(Vali_Output)
+# NM_O = MinMaxScaler()
+# NM_O.fit(Output)
+# Output = NM_O.transform(Output)
+# Vali_Output = NM_O.transform(Vali_Output)
 
 # 特徵轉換為1N CNN 可接受的形狀
 Feature = Feature.reshape(Feature.shape[0], Feature.shape[1], 1) #Tr
@@ -68,7 +68,7 @@ print(f"Test Loss: {test_loss:.4f}, Test MAE: {test_mae:.4f}")
 
 # 預測
 y_pred = model.predict(Vali_Feature)
-y_pred = NM_O.inverse_transform(y_pred)  # 還原標準化的結果
+# y_pred = NM_O.inverse_transform(y_pred)  # 還原標準化的結果
 CNN_Mape = mape(Vali_Output,y_pred)
 CNN_r2 = r2(Vali_Output,y_pred)
 

@@ -7,7 +7,7 @@ from sklearn.linear_model import BayesianRidge
 from sklearn.model_selection import GridSearchCV
 
 # Load data
-Training_set = np.loadtxt("FOMCM_TrainSet.csv", delimiter=",")
+Training_set = np.loadtxt("SDS_487.csv", delimiter=",")
 Validation_set = np.loadtxt("FOMCM_Vali.csv", delimiter=",")
 
 # 訓練集
