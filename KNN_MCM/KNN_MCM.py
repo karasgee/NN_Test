@@ -1,10 +1,10 @@
-import numpy as np
+from sklearn.datasets import make_regression
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import mean_absolute_percentage_error as mape
 from sklearn.metrics import r2_score as r2
-from sklearn.metrics import mean_squared_error as mse
-from sklearn.linear_model import BayesianRidge
-from sklearn.model_selection import GridSearchCV
+import numpy as np
 
 # Load data
 Training_set = np.loadtxt("FOMCM_TrainSet.csv", delimiter=",")
@@ -24,25 +24,20 @@ NM_F.fit(Feature)
 Feature = NM_F.transform(Feature)
 Vali_Feature = NM_F.transform(Vali_Feature)
 
-# parameter GS
-param_grid = {
-    'alpha_1': [1e-11,1e-10,1e-9,1e-8,1e-7, 1e-6, 1e-5,1e-4],
-    'alpha_2': [1e-11,1e-10,1e-9,1e-8,1e-7, 1e-6, 1e-5,1e-4],
-    'lambda_1':[1e-11,1e-10,1e-9,1e-8,1e-7, 1e-6, 1e-5,1e-4],
-    'lambda_2':[1e-11,1e-10,1e-9,1e-8,1e-7, 1e-6, 1e-5,1e-4],
-    'tol' : [1e-11,1e-10,1e-9,1e-8,1e-7, 1e-6, 1e-5,1e-4,1e-3,1e-2,1e-1]
-}
+# Define KNN
+knn_regressor = KNeighborsRegressor(n_neighbors=5) # 使用 5 個最近鄰
 
-grid_search = GridSearchCV(BayesianRidge(), param_grid, cv=8,n_jobs=-1)
-grid_search.fit(Feature, Output)
-print("Best Parameters:", grid_search.best_params_)
-pred = grid_search.predict(Vali_Feature)
+# 訓練模型
+knn_regressor.fit(Feature,Output)
+
+# 預測
+pred = knn_regressor.predict(Vali_Feature)
 
 # Model Scoring
-Bay_r2 = r2(Vali_Output,pred)
-Bay_mape = mape(Vali_Output,pred)
-print(f'r2 : {Bay_r2}')
-print(f'mape : {Bay_mape}')
+KNN_r2 = r2(Vali_Output,pred)
+KNN_mape = mape(Vali_Output,pred)
+print(f'r2 : {KNN_r2}')
+print(f'mape : {KNN_mape}')
 
 def stdevper(Ground_Truth,Predict):
     Ground_Truth=Ground_Truth.reshape(-1,1)

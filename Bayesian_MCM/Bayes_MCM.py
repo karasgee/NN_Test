@@ -30,8 +30,13 @@ Vali_Feature = NM_F.transform(Vali_Feature)
 # Vali_Output = NM_O.transform(Vali_Output).ravel()
 
 # Define Model
+# Best Parameters: {'alpha_1': 1e-11, 'alpha_2': 0.0001, 'lambda_1': 0.0001, 'lambda_2': 1e-11, 'tol': 1e-11}
 model = BayesianRidge(
-    tol = 1e-5,
+    tol = 1e-11,
+    alpha_1=1e-11,
+    alpha_2= 0.0001,
+    lambda_1=0.0001,
+    lambda_2=1e-11,
     compute_score=True,
     # fit_intercept=False
     )
