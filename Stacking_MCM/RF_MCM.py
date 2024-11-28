@@ -7,7 +7,7 @@ from sklearn.metrics import r2_score as r2
 import json
 import pickle
 from sklearn.model_selection import GridSearchCV
-import sys
+
 
 file_path = "F:\\NN_Test\\Stacking_MCM\\"
 # load data
