@@ -51,7 +51,6 @@ Bay_r2 = r2(Vali_Output,pred)
 Bay_mape = mape(Vali_Output,pred)
 print(f'r2 : {Bay_r2}')
 print(f'mape : {Bay_mape}')
-
 def stdevper(Ground_Truth,Predict):
     Ground_Truth=Ground_Truth.reshape(-1,1)
     Predict = Predict.reshape(-1,1)
@@ -63,7 +62,7 @@ def stdevper(Ground_Truth,Predict):
 aver,stan = stdevper(Vali_Output,pred)
 print(f'mean mse :{aver}')
 print(f'std mse :{stan}')
-# print(pred)
+
 # 模型參數提取
 print("Coef (Weights):", model.coef_)  # 回歸係數
 print("Intercept:", model.intercept_)  # 截距

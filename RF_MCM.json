@@ -1,0 +1,14 @@
+{
+    "bootstrap": true,
+    "criterion": "poisson",
+    "max_depth": null,
+    "max_features": 10,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "n_estimators": 140,
+    "oob_score": true,
+    "mape": 0.329877814302959,
+    "R2": -0.21529309236982286,
+    "mse mean": 0.329877814302959,
+    "mse std": 0.3047582818866512
+}
