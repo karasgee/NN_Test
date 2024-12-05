@@ -47,13 +47,13 @@ X_train, X_test, y_train, y_test = train_test_split(Feature, Output, test_size=0
 
 # 定義超參數空間
 space = {
-    'learning_rate': hp.choice('learning_rate', [0.01, 0.001, 0.0001]),
-    'batch_size': hp.choice('batch_size', [1, 8, 16, 32, 64]),
-    'kernel_size': hp.choice('kernel_size', [1, 2, 3, 5, 7, 9]),
-    'filters_layer1': hp.choice('filters_layer1', [8, 16, 32, 64, 128]),  # 第一層卷積的濾波器數
-    'filters_layer2': hp.choice('filters_layer2', [8, 16, 32, 64, 128]), # 第二層卷積的濾波器數
-    'activation': hp.choice('activation', ['relu', 'gelu', 'swish','elu','sigmoid','linear']),
-    'optimizer': hp.choice('optimizer', ['adam', 'rmsprop', 'nadam'])
+    'learning_rate': hp.choice('learning_rate', [ 0.001, 0.0001]),
+    'batch_size': hp.choice('batch_size', [ 8, 16, ]),
+    'kernel_size': hp.choice('kernel_size', [ 2, 3, 5, 7, 9]),
+    'filters_layer1': hp.choice('filters_layer1', [8, 16, 32, ]),  # 第一層卷積的濾波器數
+    'filters_layer2': hp.choice('filters_layer2', [8, 16, 32, ]), # 第二層卷積的濾波器數
+    'activation': hp.choice('activation', ['relu', 'gelu']),
+    'optimizer': hp.choice('optimizer', ['adam', 'nadam'])
 }
 
 # 模型訓練函數

@@ -79,7 +79,7 @@ print("訓練中平均MSE:", np.mean(mse_scores))
 print("訓練中標準差MSE:", np.std(mse_scores))
 
 # 存檔
-model.save('.keras') #'檔名.keras'
+model.save('MCM_ANN.keras') #'檔名.keras'
 
 # 預測
 Pred = model.predict(Vali_Feature)
