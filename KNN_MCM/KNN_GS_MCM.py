@@ -8,7 +8,7 @@ from sklearn.metrics import r2_score as r2
 import numpy as np
 
 # Load data
-Training_set = np.loadtxt("SDS_487.csv", delimiter=",")
+Training_set = np.loadtxt("FOMCM_TrainSet.csv", delimiter=",")
 Validation_set = np.loadtxt("FOMCM_Vali.csv", delimiter=",")
 
 # 訓練集
@@ -27,18 +27,18 @@ Vali_Feature = NM_F.transform(Vali_Feature)
 
 # Parameter Set
 params = {
-    'n_neighbors': range(1, 30),
+    'n_neighbors': range(1, 81),
     'metric': ['euclidean', 'manhattan', 'minkowski'],
     'weights': ['uniform', 'distance'],
-    # 'p': [1, 2, 3] ,
-    'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
+    'p': [1, 2, 3] ,
+    'algorithm': ['auto'],
 }
 
 # Define model
 knn_regressor = KNeighborsRegressor()
 
 # model training
-grid_search = GridSearchCV(knn_regressor, params, cv=3,n_jobs=-1, scoring='neg_mean_squared_error')
+grid_search = GridSearchCV(knn_regressor, params, cv=9,n_jobs=-1, scoring='neg_mean_squared_error')
 grid_search.fit(Feature,Output)
 
 # Model Predict

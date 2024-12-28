@@ -5,7 +5,7 @@ from sklearn.metrics import mean_absolute_percentage_error as mape
 from sklearn.metrics import r2_score as r2
 
 # Load data
-Training_set = np.loadtxt("SDS_729.csv", delimiter=",")
+Training_set = np.loadtxt("FOMCM_TrainSet.csv", delimiter=",")
 Validation_set = np.loadtxt("FOMCM_Vali.csv", delimiter=",")
 
 # 訓練集

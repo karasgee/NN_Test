@@ -29,19 +29,21 @@ Feature = NM.transform(Feature)
 Feature_V = NM.transform(Feature_V)
 # paraset
 param_grid = {
-    'n_estimators': [50,70,100,110,140,150,200,400,550,500,1000],
+    # 'n_estimators': [50,70,100,110,140,150,200,400,550,500,1000],
+    'n_estimators': [550],
     'max_depth': [None],
-    'max_features': ['sqrt','log2',2,10],
+    'max_features': ['sqrt'],
     # 'bootstrap': [True,False],
-    'criterion':['squared_error', 'absolute_error', 'friedman_mse', 'poisson'],
+    # 'criterion':['squared_error', 'absolute_error', 'friedman_mse', 'poisson'],
+    'criterion':['squared_error'],
     # 'oob_score':[True,False],
     # 'min_impurity_decrease':[0.0,1.0],
-    'max_samples':[None,100,200,400],
+    # 'max_samples':[None,100,200,400],
 }
 
 # Training Model(RF)
 RF_model = RandomForestRegressor(random_state=42,verbose=1)
-grid_search = GridSearchCV(estimator=RF_model, param_grid=param_grid, cv=10, scoring='r2', n_jobs=-1)
+grid_search = GridSearchCV(estimator=RF_model, param_grid=param_grid, cv=8, scoring='r2', n_jobs=-1)
 grid_search.fit(Feature,Output)
 print("最佳參數組合：", grid_search.best_params_)
 print("最佳模型的性能：", grid_search.best_score_)
